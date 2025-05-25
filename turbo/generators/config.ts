@@ -115,6 +115,34 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
         skip: () => 'Skipping .gitignore update',
       });
 
+      // Add a custom action to display next steps and run install
+      actions.push(async (answers) => {
+        console.log('\n✅ CLI tool created successfully!\n');
+        console.log('📦 Installing dependencies...');
+        
+        // Run pnpm install
+        const { execSync } = require('child_process');
+        try {
+          execSync('pnpm install', { 
+            stdio: 'inherit',
+            cwd: process.cwd()
+          });
+          console.log('\n✨ Dependencies installed successfully!\n');
+          console.log('🚀 Next steps:');
+          console.log(`   1. Navigate to: cd tools/${language}/${name}`);
+          console.log(`   2. Try it out: pnpm dev --help`);
+        } catch (error) {
+          console.log('\n⚠️  Failed to install dependencies automatically.');
+          console.log('\n📦 Next steps:');
+          console.log(`   1. Run: pnpm install`);
+          console.log(`   2. Navigate to: cd tools/${language}/${name}`);
+          console.log(`   3. Try it out: pnpm dev --help`);
+        }
+        
+        console.log('\n💡 Tip: Check the README.md in your new tool for more commands.\n');
+        return 'Post-generation completed';
+      });
+
       return actions;
     },
   });

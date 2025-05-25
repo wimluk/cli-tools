@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is a multi-language CLI tools monorepo using:
 - **Languages**: TypeScript, Go, Rust, and Python
 - **Build System**: Turborepo (v2.5.3)
-- **Package Manager**: pnpm (v9.0.0)
+- **Package Manager**: pnpm (v9.0.0) - ALWAYS use pnpm, never use npm or npx
 - **Node Version**: >=18
 - **Python Version**: >=3.8
 
@@ -91,13 +91,25 @@ cli-tools/
 
 #### Using Turbo Generator (Recommended)
 ```bash
+# Interactive mode
 pnpm turbo gen cli-tool
+
+# Automated mode (for TypeScript)
+pnpm dlx turbo gen cli-tool --args typescript <tool-name> "<description>"
 ```
 
 The generator will:
 - Prompt for language choice (TypeScript, Go, Rust, or Python)
 - Ask for tool name and description
 - Create complete tool structure with build configs, sample CLI, and tests
+- **Automatically run `pnpm install` after generation**
+- Display next steps with clear instructions
+
+#### TypeScript CLI Development Tips
+- `pnpm dev [command] [options]` - Run CLI directly (fast, no watch mode)
+- `pnpm dev:watch` - Run with file watching (auto-restarts on changes)
+- Example: `pnpm dev hello --uppercase`
+- The generated README has comprehensive examples and project structure
 
 #### Manual Creation
 1. **TypeScript**: Create directory in `tools/typescript/`, run `pnpm init`, add TypeScript deps
