@@ -6,6 +6,8 @@ describe('CLI', () => {
     const output = execSync('tsx src/cli.ts --help', { encoding: 'utf8' });
     expect(output).toContain('{{name}}');
     expect(output).toContain('{{description}}');
+    expect(output).toContain('Examples:');
+    expect(output).toContain('$ {{name}} hello');
   });
 
   it('should display version', () => {

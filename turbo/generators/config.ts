@@ -15,6 +15,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
         type: 'input',
         name: 'name',
         message: 'What is the name of your CLI tool?',
+        default: 'hello-world',
         validate: (input: string) => {
           if (!input) {
             return 'CLI tool name is required';
