@@ -1,84 +1,174 @@
-# Turborepo starter
+# CLI Tools Monorepo
 
-This Turborepo starter is maintained by the Turborepo core team.
+A multi-language monorepo for building CLI tools using TypeScript, Go, Rust, and Python, powered by Turborepo.
 
-## Using this example
+## 🚀 Quick Start
 
-Run the following command:
+### Prerequisites
 
-```sh
-npx create-turbo@latest
-```
+- Node.js >= 18
+- pnpm >= 9.0.0
+- Go >= 1.21 (for Go tools)
+- Rust >= 1.70 (for Rust tools)
+- Python >= 3.8 (for Python tools)
 
-## What's inside?
+### Installation
 
-This Turborepo includes the following packages/apps:
+```bash
+# Install dependencies
+pnpm install
 
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
+# Build all tools
 pnpm build
+
+# Run tests
+pnpm test
 ```
 
-### Develop
-
-To develop all apps and packages, run the following command:
+## 📁 Project Structure
 
 ```
-cd my-turborepo
+cli-tools/
+├── packages/           # Shared packages
+│   ├── eslint-config/ # Shared ESLint configurations
+│   ├── typescript-config/ # Shared TypeScript configurations
+│   └── ui/            # Shared UI components (if needed)
+├── tools/             # CLI tools organized by language
+│   ├── typescript/    # TypeScript CLI tools
+│   ├── go/           # Go CLI tools
+│   ├── rust/         # Rust CLI tools
+│   └── python/       # Python CLI tools
+├── turbo.json        # Turborepo configuration
+└── package.json      # Root package configuration
+```
+
+## 🛠️ Available Commands
+
+### Building
+
+```bash
+# Build all tools
+pnpm build
+
+# Build TypeScript tools only
+pnpm build:ts
+
+# Build Go tools only
+pnpm build:go
+
+# Build Rust tools only
+pnpm build:rust
+
+# Build Python tools only
+pnpm build:python
+```
+
+### Linting
+
+```bash
+# Lint all code
+pnpm lint
+
+# Lint TypeScript code only
+pnpm lint:ts
+
+# Lint Go code only
+pnpm lint:go
+
+# Lint Rust code only
+pnpm lint:rust
+
+# Lint Python code only
+pnpm lint:python
+```
+
+### Development
+
+```bash
+# Run in development mode
 pnpm dev
+
+# Format code
+pnpm format
+
+# Type checking
+pnpm check-types
+
+# Clean build artifacts
+pnpm clean
 ```
 
-### Remote Caching
+## 🔧 Creating a New CLI Tool
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+### Using Turbo Generator (Recommended)
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+The easiest way to create a new CLI tool is using the built-in Turbo generator:
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
+```bash
+pnpm turbo gen cli-tool
 ```
-cd my-turborepo
+
+You'll be prompted to:
+1. Choose a language (TypeScript, Go, Rust, or Python)
+2. Enter the tool name
+3. Provide a description
+
+The generator will create a fully configured CLI tool with:
+- Proper package structure
+- Build configuration
+- Sample CLI implementation
+- Testing setup
+- README documentation
+
+### Manual Creation
+
+#### TypeScript Tool
+
+1. Create a new directory in `tools/typescript/`
+2. Initialize with `pnpm init`
+3. Add TypeScript dependencies
+4. Configure build scripts
+
+#### Go Tool
+
+1. Create a new directory in `tools/go/`
+2. Initialize with `go mod init`
+3. Add build configuration to package.json
+
+#### Rust Tool
+
+1. Create a new directory in `tools/rust/`
+2. Initialize with `cargo init`
+3. Add build configuration to package.json
+
+#### Python Tool
+
+1. Create a new directory in `tools/python/`
+2. Create `pyproject.toml` for package configuration
+3. Add package.json for Turborepo integration
+
+## 🏗️ Architecture
+
+This monorepo uses Turborepo to manage builds across multiple languages:
+
+- **TypeScript tools**: Built with tsc/esbuild, output to `dist/`
+- **Go tools**: Built with go build, output to `bin/`
+- **Rust tools**: Built with cargo, output to `target/`
+- **Python tools**: Use pip/setuptools, output to `dist/`
+
+Shared packages in the `packages/` directory can be used across TypeScript tools.
+
+## 🚀 Remote Caching
+
+Turborepo can use a technique known as Remote Caching to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+
+By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+
+```bash
 npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
 npx turbo link
 ```
 
-## Useful Links
+## 📝 License
 
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+This project is licensed under the MIT License.

@@ -1,0 +1,15 @@
+{
+  "name": "@cli-tools/{{name}}",
+  "version": "0.1.0",
+  "description": "{{description}}",
+  "private": true,
+  "scripts": {
+    "build": "go build -o bin/{{name}} ./cmd/{{name}}",
+    "build:go": "go build -o bin/{{name}} ./cmd/{{name}}",
+    "dev": "go run ./cmd/{{name}}",
+    "lint": "golangci-lint run",
+    "lint:go": "golangci-lint run",
+    "test": "go test ./...",
+    "clean": "rm -rf bin/"
+  }
+}

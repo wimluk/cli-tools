@@ -1,0 +1,9 @@
+[package]
+name = "{{name}}"
+version = "0.1.0"
+edition = "2021"
+description = "{{description}}"
+
+[dependencies]
+clap = { version = "4.5", features = ["derive"] }
+colored = "2.1"

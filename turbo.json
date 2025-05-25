@@ -5,10 +5,42 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": ["dist/**", "bin/**", "target/**"]
+    },
+    "build:ts": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "build:go": {
+      "dependsOn": ["^build"],
+      "outputs": ["bin/**"]
+    },
+    "build:rust": {
+      "dependsOn": ["^build"],
+      "outputs": ["target/**"]
+    },
+    "build:python": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", "*.egg-info/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]
+    },
+    "lint:ts": {
+      "dependsOn": ["^lint"]
+    },
+    "lint:go": {
+      "dependsOn": ["^lint"]
+    },
+    "lint:rust": {
+      "dependsOn": ["^lint"]
+    },
+    "lint:python": {
+      "dependsOn": ["^lint"]
+    },
+    "test": {
+      "dependsOn": ["^test"],
+      "outputs": []
     },
     "check-types": {
       "dependsOn": ["^check-types"]
@@ -16,6 +48,12 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "clean": {
+      "cache": false
     }
+  },
+  "generators": {
+    "config": "turbo/generators/config.ts"
   }
 }

@@ -26,6 +26,8 @@ coverage
 out/
 build
 dist
+bin/
+target/
 
 
 # Debug
@@ -36,3 +38,27 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.pytest_cache/
+.coverage
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Go
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Rust
+# Note: Cargo.lock is intentionally NOT ignored for CLI tools

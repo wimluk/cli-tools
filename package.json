@@ -1,14 +1,26 @@
 {
   "name": "cli-tools",
   "private": true,
+  "description": "A multi-language monorepo for CLI tools using TypeScript, Go, Rust, and Python",
   "scripts": {
     "build": "turbo run build",
+    "build:ts": "turbo run build:ts --filter=./tools/typescript/**",
+    "build:go": "turbo run build:go --filter=./tools/go/**",
+    "build:rust": "turbo run build:rust --filter=./tools/rust/**",
+    "build:python": "turbo run build:python --filter=./tools/python/**",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run check-types"
+    "lint:ts": "turbo run lint:ts --filter=./tools/typescript/**",
+    "lint:go": "turbo run lint:go --filter=./tools/go/**",
+    "lint:rust": "turbo run lint:rust --filter=./tools/rust/**",
+    "lint:python": "turbo run lint:python --filter=./tools/python/**",
+    "test": "turbo run test",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json,yml,yaml}\"",
+    "check-types": "turbo run check-types",
+    "clean": "turbo run clean"
   },
   "devDependencies": {
+    "@turbo/gen": "^2.5.3",
     "prettier": "^3.5.3",
     "turbo": "^2.5.3",
     "typescript": "5.8.2"
